@@ -1,21 +1,12 @@
 import { useQuery } from "@apollo/client";
 import { GET_ALL_CONTINENTS } from "../graphql/getAllContinents";
-import { useEffect } from "react";
 import { Card } from "antd";
-import { Link } from "react-router-dom";
 import { Continent } from "../types/continentType";
-import styled from "styled-components";
-
-const StyledLink = styled(Link)`
-    text-decoration: none;
-`;
+import HeaderTitle from "../components/HeaderTitle";
+import UnstyledLink from "../components/UnstyledLink";
 
 const ContinentsList = () => {
     const { loading, error, data } = useQuery(GET_ALL_CONTINENTS);
-
-    useEffect(() => {
-        console.log(data?.continents);
-    }, [data]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -31,13 +22,14 @@ const ContinentsList = () => {
 
     return (
         <div>
+            <HeaderTitle title="Continents" />
             {data.continents.map((continent: Continent) => (
-                <StyledLink
+                <UnstyledLink
                     key={continent.code}
                     to={`/continents/${continent.code}`}
                 >
                     <Card>{continent.name}</Card>
-                </StyledLink>
+                </UnstyledLink>
             ))}
         </div>
     );
