@@ -8,10 +8,14 @@ import { Country } from "../types/countryType";
 import UnstyledLink from "../components/UnstyledLink";
 import CustomGrid from "../components/CustomGrid";
 import CustomGridElement from "../components/CustomGridElement";
+import CustomSearchInput from "../components/CustomSearchInput";
+import { useState } from "react";
 
 const CountriesList = () => {
     const { continentCode } = useParams();
     const navigate = useNavigate();
+
+    const [searchValue, setSearchValue] = useState("");
 
     const { loading, error, data } = useQuery<{ continent: Continent }>(
         GET_CONTINENT_COUNTRIES,
@@ -32,6 +36,17 @@ const CountriesList = () => {
         return <div>No data could be found.</div>;
     }
 
+    const filteredCountries =
+        data.continent.countries !== undefined
+            ? searchValue === ""
+                ? data.continent.countries
+                : data.continent.countries.filter((country: Country) =>
+                      country.name
+                          .toLowerCase()
+                          .includes(searchValue.toLowerCase())
+                  )
+            : [];
+
     return (
         <div>
             <Button onClick={() => navigate(`/`)}>
@@ -39,15 +54,19 @@ const CountriesList = () => {
             </Button>
 
             <HeaderTitle title={`Countries in ${data.continent.name}`} />
+            <CustomSearchInput value={searchValue} setValue={setSearchValue} />
             <CustomGrid>
-                {data.continent.countries ? (
-                    data.continent.countries.map((country: Country) => (
+                {filteredCountries.length > 0 ? (
+                    filteredCountries.map((country: Country) => (
                         <CustomGridElement key={country.code}>
                             <UnstyledLink
                                 key={country.code}
                                 to={`/continents/${continentCode}/countries/${country.code}`}
                             >
-                                <Card>
+                                <Card
+                                    style={{ height: "100%" }}
+                                    hoverable={true}
+                                >
                                     <p>{country.emoji}</p>
                                     {country.name}
                                 </Card>

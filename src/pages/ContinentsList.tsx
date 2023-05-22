@@ -32,7 +32,9 @@ const ContinentsList = () => {
                             key={continent.code}
                             to={`/continents/${continent.code}`}
                         >
-                            <Card>{continent.name}</Card>
+                            <Card style={{ height: "100%" }} hoverable={true}>
+                                {continent.name}
+                            </Card>
                         </UnstyledLink>
                     </CustomGridElement>
                 ))}

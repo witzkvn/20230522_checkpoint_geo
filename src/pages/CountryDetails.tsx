@@ -16,10 +16,6 @@ const CountryDetails = () => {
             variables: { countryCode },
         }
     );
-    console.log(
-        "🚀 ~ file: CountryDetails.tsx:10 ~ CountryDetails ~ data:",
-        data
-    );
 
     if (loading) {
         return <div>Loading...</div>;
