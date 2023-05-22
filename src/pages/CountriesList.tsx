@@ -6,6 +6,8 @@ import HeaderTitle from "../components/HeaderTitle";
 import { Continent } from "../types/continentType";
 import { Country } from "../types/countryType";
 import UnstyledLink from "../components/UnstyledLink";
+import CustomGrid from "../components/CustomGrid";
+import CustomGridElement from "../components/CustomGridElement";
 
 const CountriesList = () => {
     const { continentCode } = useParams();
@@ -13,7 +15,6 @@ const CountriesList = () => {
     const { loading, error, data } = useQuery<{ continent: Continent }>(
         GET_CONTINENT_COUNTRIES,
         {
-            fetchPolicy: "no-cache", // Used for first execution
             variables: { continentCode },
         }
     );
@@ -33,18 +34,22 @@ const CountriesList = () => {
     return (
         <div>
             <HeaderTitle title={`Countries in ${data?.continent.name}`} />
-            {data.continent.countries ? (
-                data.continent.countries.map((country: Country) => (
-                    <UnstyledLink
-                        key={country.code}
-                        to={`/continents/${continentCode}/countries/${country.code}`}
-                    >
-                        <Card>{country.name}</Card>
-                    </UnstyledLink>
-                ))
-            ) : (
-                <p>No countries could be found for this continent.</p>
-            )}
+            <CustomGrid>
+                {data.continent.countries ? (
+                    data.continent.countries.map((country: Country) => (
+                        <CustomGridElement key={country.code}>
+                            <UnstyledLink
+                                key={country.code}
+                                to={`/continents/${continentCode}/countries/${country.code}`}
+                            >
+                                <Card>{country.name}</Card>
+                            </UnstyledLink>
+                        </CustomGridElement>
+                    ))
+                ) : (
+                    <p>No countries could be found for this continent.</p>
+                )}
+            </CustomGrid>
         </div>
     );
 };
