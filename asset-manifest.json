@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/20230522_checkpoint_geo/static/css/main.073c9b0a.css",
+    "main.js": "/20230522_checkpoint_geo/static/js/main.a50a855d.js",
+    "static/js/787.ab14c928.chunk.js": "/20230522_checkpoint_geo/static/js/787.ab14c928.chunk.js",
+    "index.html": "/20230522_checkpoint_geo/index.html",
+    "main.073c9b0a.css.map": "/20230522_checkpoint_geo/static/css/main.073c9b0a.css.map",
+    "main.a50a855d.js.map": "/20230522_checkpoint_geo/static/js/main.a50a855d.js.map",
+    "787.ab14c928.chunk.js.map": "/20230522_checkpoint_geo/static/js/787.ab14c928.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.a50a855d.js"
+  ]
+}
