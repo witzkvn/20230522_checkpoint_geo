@@ -3,7 +3,7 @@ import { Col } from "antd";
 
 const CustomGridElement = ({ children }: { children: React.ReactNode }) => {
     return (
-        <Col xs={24} sm={12} md={8} lg={6} xl={4}>
+        <Col xs={24} sm={12} md={8} lg={6}>
             {children}
         </Col>
     );

@@ -1,7 +1,7 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GET_CONTINENT_COUNTRIES } from "../graphql/getContinentCountries";
 import { useQuery } from "@apollo/client";
-import { Card } from "antd";
+import { Button, Card } from "antd";
 import HeaderTitle from "../components/HeaderTitle";
 import { Continent } from "../types/continentType";
 import { Country } from "../types/countryType";
@@ -11,6 +11,7 @@ import CustomGridElement from "../components/CustomGridElement";
 
 const CountriesList = () => {
     const { continentCode } = useParams();
+    const navigate = useNavigate();
 
     const { loading, error, data } = useQuery<{ continent: Continent }>(
         GET_CONTINENT_COUNTRIES,
@@ -33,7 +34,11 @@ const CountriesList = () => {
 
     return (
         <div>
-            <HeaderTitle title={`Countries in ${data?.continent.name}`} />
+            <Button onClick={() => navigate(`/`)}>
+                {"< Back to Continents"}
+            </Button>
+
+            <HeaderTitle title={`Countries in ${data.continent.name}`} />
             <CustomGrid>
                 {data.continent.countries ? (
                     data.continent.countries.map((country: Country) => (
@@ -42,7 +47,10 @@ const CountriesList = () => {
                                 key={country.code}
                                 to={`/continents/${continentCode}/countries/${country.code}`}
                             >
-                                <Card>{country.name}</Card>
+                                <Card>
+                                    <p>{country.emoji}</p>
+                                    {country.name}
+                                </Card>
                             </UnstyledLink>
                         </CustomGridElement>
                     ))

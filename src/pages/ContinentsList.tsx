@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { GET_ALL_CONTINENTS } from "../graphql/getAllContinents";
-import { Row, Col, Card } from "antd";
+import { Card } from "antd";
 import { Continent } from "../types/continentType";
 import HeaderTitle from "../components/HeaderTitle";
 import UnstyledLink from "../components/UnstyledLink";
